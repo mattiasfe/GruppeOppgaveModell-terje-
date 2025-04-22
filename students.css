@@ -1,0 +1,18 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#students-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.student-card {
+    padding: 15px;
+    color: white;
+    border-radius: 10px;
+    width: 200px;
+    box-shadow: 2px 2px 5px rgba (0, 0, 0, 0.1);
+}

@@ -1,0 +1,150 @@
+/*v Table CSS v*/
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  
+}
+
+.table-grid{
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+}
+
+.tr-grid{
+  display: grid;
+  grid-template-columns: 1fr repeat(2, 4fr) 1fr;
+  border: 1px solid #575353;
+
+}
+
+td,
+th {
+  border-left: 1px solid #575353;
+  text-align: left;
+  padding: 8px;
+  height: 100%;
+
+}
+tr{
+ 
+  width: 100%;
+}
+
+#emptyOverhead {
+  border: none;
+}
+
+.infotd {
+  float: inline-start;
+
+  border: none;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+/*^ Table CSS ^*/
+
+
+/*v Filter Menu CSS v*/
+
+#filterheader {
+  margin-top: 3px;
+  text-align: center;
+  border-bottom: 1px black solid;
+}
+
+#filterContainer {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  display: flex;
+  max-width: 28%;
+  min-width: 5%;
+  justify-content: space-between;
+}
+
+
+.subfilter-cont {
+  background-color: #808080;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border: 1px black solid;
+  min-width: 160px;
+  z-index: 1;
+
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.datefiltcont {
+margin: 4px;
+}
+/*^ Filter Menu CSS ^*/
+
+/*v Misc. CSS v*/
+
+#infobtn {
+  background-color: #808080;
+  color: white;
+  padding: 8px;
+  font-size: 8;
+  cursor: pointer;
+}
+
+.show {
+  display: block;
+}
+
+#editCheckbox {
+  height: 30px;
+  width: 30px;
+}
+
+.studentContainer {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+
+
+#selectStudentCheckBox {
+  float: right;
+}
+
+#statusCollorGreen {
+  color: green;
+}
+#statusCollorRed {
+  color: red;
+}
+#statusCollorBlue {
+  color: blue;
+}
+#statusCollorGray {
+  color: gray;
+}
+
+#FullfortColor {
+  color: green;
+  margin: 0.2px;
+}
+#StartetColor {
+  color: rgb(80, 104, 211);
+  margin: 0.2px;
+}
+#AvbruttColor {
+  color: red;
+  margin: 0.2px;
+}
+#SoktColor {
+  color: black;
+  margin: 0.2px;
+}
+
+/*^ Misc. CSS ^*/
