@@ -1,17 +1,20 @@
- function updateView(filteredList) {
-    let currentVeiw = '';
+function updateView(filteredList = model.inputs.databasePage.filteredList) {
+    let currentView = '';
+    const selectedCourse = model.inputs.databasePage.selectedCourse;
+    
     switch(model.app.currentPage) {
         case 'Database':
-            currentVeiw = actionsStudentsDescop(filteredList);
+            currentView = actionsStudentsDisplay(filteredList || model.data.students, selectedCourse);
             break;
+
     }
+    
     document.getElementById('app').innerHTML = /*HTML*/`
         <div id="header">
             <h1>Desktop</h1>
-
             <div id="content">
-                ${currentVeiw}
+                ${currentView}
             </div>
         </div>
     `;
- }
+}

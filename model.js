@@ -11,7 +11,7 @@ const model = {
             dateFromFilter: '',
             dateToFilter: '',
             bulkSelectDate: '',
-            bulkSelectedCourse: [],
+            bulkSelectedCourse: '',
         }
     },
     data: {

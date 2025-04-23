@@ -63,15 +63,23 @@ function searchInArray(searchTerm){
   updateView();
 }
 
-function searchInArrayChecked(checkedTerm){
-/*   let checkedList = model.data.CheckBoxCourse.checked; */
-  let selectedCourse = model.data.studentActions.filter((actions) => {
-/*     let checkedList = false; */
-    let courses = model.data.studentActions.activeCourse;
-    if(courses.includes(checkedTerm)){
-        return studentActions;
-    }
-})
+function checkedInputs(input) {
+  model.inputs.databasePage.bulkSelectedCourse = input;
+  searchInArrayChecked(input);
+}
+
+function searchInArrayChecked(checkedTerm) {
+  
+  const searchTerm = checkedTerm.toLowerCase().trim();
+  
+  let selectedCourse = model.data.studentActions.filter((studentAction) => {
+    if (!studentAction.activeCourse) return false;
+    
+    
+    const [courseName] = studentAction.activeCourse.split(' ');
+    return courseName.toLowerCase() === searchTerm;
+  });
+  
   model.inputs.databasePage.selectedCourse = selectedCourse;
   console.log(selectedCourse);
   updateView();
