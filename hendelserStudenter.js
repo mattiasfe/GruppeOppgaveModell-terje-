@@ -20,64 +20,70 @@ function actionsStudentsDisplay() {
 
 function getStudentActionRows() {
   let html = "";
-  const { students, studentActions } = model.data;
-  const { search, filteredList } = model.inputs.databasePage;
-  
+  const students = model.data.students;
+  const userInput = model.inputs.databasePage.search;
+  const actions = model.data.studentActions;
+  // const studentStatus = model.data.studentActions.studentStatus;
+  // const statusText = model.data.statusText;
+  /* let toggleList = userInput == "" ? students : model.inputs.databasePage.selectedCourse; */
+  let toggleList = userInput == "" ? students : model.inputs.databasePage.filteredList;
+  console.log(toggleList)
 
-  const displayList = search ? (filteredList || []) : students;
-  
-  
-  if (search && (!filteredList || filteredList.length === 0)) {
-    html += `<tr><td colspan="4">Ingen studenter funnet</td></tr>`;
-    return html;
-  }
-
-  displayList.forEach((student, index) => {
-    const action = studentActions[index];
-    if (!action) return; 
-    
-    const statusText = model.data.courseStatusText[action.studentStatus]?.text || '';
-    
+  for (let i = 0; i < toggleList.length; i++) {
+    let tempStatusStorage = '';
+    let staText = '';
+    const student = toggleList[i];
+    const action = actions[i];
+    const status = actions[i].studentStatus;
+    staText = model.data.courseStatusText[status].text;
+    tempStatusStorage = staText;
     html += /*HTML*/ `
-      <tr class="tr-grid">
-        <td class="infotd">
-          <button id="infobtn" onclick="getFullStudentInfo(${student.id})">
-            ${student.showingFullInfo ? 'Skjul' : 'Info'}
-          </button>
-        </td>
-        <td>
-          Navn: ${student.name}<br>
-          F.dato: ${student.dob}<br>
-          ${student.showingFullInfo ? `
-            Email: ${student.email}<br>
-            Tlf: ${student.tlf}<br>
-            Discord: ${student.discord}<br>
-          ` : ''}
-        </td>
-        <td>
-          Siste Hendelse: ${action.activeCourse} ${statusText}<br>
-          ${student.showingFullInfo ? `
-            Har gått: ${action.coursesDone}<br><br>
-            Betalt: ${action.paymentDone}<br>
-            Skylder: ${action.owes}<br>
-          ` : ''}
-        </td>
-        <td>
-          <input type="checkbox" onclick="isCheckboxChecked(${student.id})">
-        </td>
-      </tr>
-    `;
-  });
-
+    
+            <tr class="tr-grid">
+              <td class="infotd">
+                
+                  <button id="infobtn" onclick="getFullStudentInfo(${student.id})">Info</button>
+              </td>
+                <td>
+                    Navn: ${student.name}<br>
+                    F.dato: ${student.dob}<br>
+                           
+                    ${
+                      student.showingFullInfo
+                        ? `Email: ${student.email}<br>
+                    Tlf: ${student.tlf}<br>
+                    Discord: ${student.discord}<br>`
+                        : ``
+                    }
+                </td>
+                <td>
+                    Siste Hendelse: ${action.activeCourse} ${tempStatusStorage}<br>
+                    
+                     ${
+                       student.showingFullInfo
+                       
+                         ? `Har gått: ${action.coursesDone}<br>
+                         <br>
+                    Betalt: ${action.paymentDone}<br>
+                    Skylder: ${action.owes}<br>`
+                    : ``
+                    
+                }
+                <td>
+                    <input type="checkbox" id="editCheckbox" onclick="isCheckboxChecked()">
+                </td>
+            </tr>
+  
+        `;
+  }
   return html;
 }
 
-function getFullStudentInfo(id) {
-  const student = model.data.students.find(s => s.id === id);
-  if (student) {
-    student.showingFullInfo = !student.showingFullInfo;
-    updateView();
-  }
+
+function getFullStudentInfo(ident) {
+  const student = model.data.students[ident - 1];
+  student.showingFullInfo = !student.showingFullInfo;
+  updateView();
 }
 //fullfør funksjonen og send til array
 /* function isCheckboxChecked(value, id) {

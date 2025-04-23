@@ -10,13 +10,13 @@ function searchFilters() {
     <div id="coursefilter" class="filterBox">
     <div class="subfilter-cont">
     <h3 id="filterheader">Kurs</h3>
-    <input type="checkbox" id="coursecheck1" name="coursecheck1" value="Get-IT" onclick="checkCourseFunc(this)">
+    <input type="checkbox" id="coursecheck1" name="coursecheck1" value="Get-IT" onclick="getList(this)">
     <label for="coursecheck1">Get-IT</label><br>
-    <input type="checkbox" id="coursecheck2" name="coursecheck2" value="Start-IT" onclick="checkCourseFunc(this)">
+    <input type="checkbox" id="coursecheck2" name="coursecheck2" value="Start-IT" onclick="getList(this)">
     <label for="coursecheck2">Start IT</label><br>
-    <input type="checkbox" id="coursecheck3" name="coursecheck3" value="Frontend" onclick="checkCourseFunc(this)">
+    <input type="checkbox" id="coursecheck3" name="coursecheck3" value="Frontend" onclick="getList(this)">
     <label for="coursecheck3">Frontend</label><br>
-    <input type="checkbox" id="coursecheck4" name="coursecheck4" value="Intro" onclick="checkCourseFunc(this)">
+    <input type="checkbox" id="coursecheck4" name="coursecheck4" value="Intro" onclick="getList(this)">
     <label for="coursecheck4">Intro</label><br>
     </div>
     </div>
@@ -63,8 +63,35 @@ function searchInArray(searchTerm){
   updateView();
 }
 
-function checkedInputs(input) {
-  model.inputs.databasePage.bulkSelectedCourse = input;
+
+function getList(element){
+  //i view hvor dere looper igjennom listen for å vise hvem studentene etc, 
+  //kan dere da bruke const list = getList();
+  //loop igjennom den istedenfor, for da kan dere alltid kalle på updateView etter at checkboksene
+  //er endret. 
+
+  let filterList = [];
+  let isChecked = model.data.CheckBoxCourse.find(element => element.checked == true);
+  if(isChecked){
+   for (i = 0; i < studentActions.length; i++) {
+    if (studentActions[i].activeCourse == isChecked) {
+      filterList.push(students[i]);
+    }
+   }
+   model.inputs.databasePage.filteredList = filterList;
+   updateView();
+   console.log(filterList);
+//loope and shit for å pushe riktige ting i filterList. 
+  }
+  else{
+    return model.data.students;
+  }
+}
+
+
+//FÅ ALT DETTE HER OG NEDOVER TIL Å FUNKE!!
+/* function checkedInputs(input) {
+  model.inputs.databasePage.bulkSelectedCourse = input.value;
   searchInArrayChecked(input);
 }
 
@@ -74,8 +101,6 @@ function searchInArrayChecked(checkedTerm) {
   
   let selectedCourse = model.data.studentActions.filter((studentAction) => {
     if (!studentAction.activeCourse) return false;
-    
-    
     const [courseName] = studentAction.activeCourse.split(' ');
     return courseName.toLowerCase() === searchTerm;
   });
@@ -83,17 +108,18 @@ function searchInArrayChecked(checkedTerm) {
   model.inputs.databasePage.selectedCourse = selectedCourse;
   console.log(selectedCourse);
   updateView();
-}
+} */
 
 
-//FÅ ALT DETTE HER OG NEDOVER TIL Å FUNKE!!
-function checkCourseFunc(element) {
+
+
+/* function checkCourseFunc(element) {
 
   if (element.checked == true){
     let tempElementStorage = '';
     model.data.CheckBoxCourse.find(course => course.name == element.value).checked = true; 
     /* checkedCourses(element); */
-    searchInArrayChecked(element.value)
+/*     searchInArrayChecked(element.value)
     console.log('courseIsChecked');
     console.log(element.value);
   } else {
@@ -103,7 +129,7 @@ function checkCourseFunc(element) {
   
   
   console.log(model.data.CheckBoxCourse.find(course => course.name == element.value).checked)
-}
+} */ 
 
 /* function checkStatusFunc(element) {
   
@@ -129,7 +155,7 @@ function checkCourseFunc(element) {
    })
 } */
 
-   function checkedCourses(element) {
+/*    function checkedCourses(element) {
     let selectedCourses = model.data.studentActions.filter((studentAction) => {
         return studentAction.activeCourse.includes(element);
     });
@@ -138,4 +164,4 @@ function checkCourseFunc(element) {
 
     return selectedCourses;
    
- }
+ } */
