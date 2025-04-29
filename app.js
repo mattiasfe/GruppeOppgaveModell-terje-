@@ -1,10 +1,10 @@
 function updateView(filteredList = model.inputs.databasePage.filteredList) {
     let currentView = '';
-    const selectedCourse = model.inputs.databasePage.selectedCourse;
+    const electedHorse = model.inputs.databasePage.electedHorse;
     
     switch(model.app.currentPage) {
         case 'Database':
-            currentView = actionsStudentsDisplay(filteredList || model.data.students, selectedCourse);
+            currentView = actionsStudentsDisplay(filteredList || model.data.students, electedHorse);
             break;
 
     }

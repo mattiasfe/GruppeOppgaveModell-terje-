@@ -52,7 +52,7 @@ const model = {
 
     students: [
       {
-        id: 1,
+        id: 0,
         name: "Ola Nordman",
         dob: "1990-03-24",
         email: "ola.nordman@online.no, olanor@getacademy.no",
@@ -66,7 +66,7 @@ const model = {
         owes: 30000,
       },
       {
-        id: 2,
+        id: 1,
         name: "Fabian Jensen",
         dob: "1990-03-24",
         email: "fabij@online.no, fabjen@getacademy.no",
@@ -80,7 +80,7 @@ const model = {
         owes: 33000,
       },
       {
-        id: 3,
+        id: 2,
         name: "Emil Johansen",
         dob: "1998-03-12",
         email: "emil.johansen@getmail.com",
@@ -94,7 +94,7 @@ const model = {
         owes: 31000,
       },
       {
-        id: 4,
+        id: 3,
         name: "Sara Kristofferen",
         dob: "2001-06-25",
         email: "sara.k@getmail.com",
@@ -108,7 +108,7 @@ const model = {
         owes: 32000,
       },
       {
-        id: 5,
+        id: 4,
         name: "Martin Olsen",
         dob: "1997-11-08",
         email: "martin.olsen@getmail.com",
@@ -122,7 +122,7 @@ const model = {
         owes: 34000,
       },
       {
-        id: 6,
+        id: 5,
         name: "Ingrid Olsen",
         dob: "2000-09-14",
         email: "ingrid.n@getmail.com",
@@ -136,7 +136,7 @@ const model = {
         owes: 32500,
       },
       {
-        id: 7,
+        id: 6,
         name: "Tobias Hansen",
         dob: "1999-05-03",
         email: "tobias.hansen@getmail.com",
@@ -150,7 +150,7 @@ const model = {
         owes: 31500,
       },
       {
-        id: 8,
+        id: 7,
         name: "Line Berg",
         dob: "2002-01-29",
         email: "line.berg@getmail.com",
@@ -164,7 +164,7 @@ const model = {
         owes: 30000,
       },
       {
-        id: 9,
+        id: 8,
         name: "Kevin Solberg",
         dob: "1996-08-17",
         email: "kevin.solberg@getmail.com",
@@ -178,7 +178,7 @@ const model = {
         owes: 31500,
       },
       {
-        id: 10,
+        id: 9,
         name: "Amalie Larsen",
         dob: "1999-05-12",
         email: "amamlie.larsen@getmail.com",
