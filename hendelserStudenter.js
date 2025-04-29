@@ -11,7 +11,7 @@ function actionsStudentsDisplay() {
       </thead>
       <tbody>
         ${searchBarView()}
-        ${searchFilters()}
+        ${courseFilters()}
         ${getStudentActionRows()}
       </tbody>
     </table>
@@ -22,21 +22,28 @@ function getStudentActionRows() {
   let html = "";
   const students = model.data.students;
   const userInput = model.inputs.databasePage.search;
-  const actions = model.data.studentActions;
+  /* const actions = model.data.students.studentAction; */
+/*   const courselist = getList(); */
   // const studentStatus = model.data.studentActions.studentStatus;
   // const statusText = model.data.statusText;
   /* let toggleList = userInput == "" ? students : model.inputs.databasePage.selectedCourse; */
   let toggleList = userInput == "" ? students : model.inputs.databasePage.filteredList;
-  console.log(toggleList)
+/*   let toggleList = model.inputs.databasePage.filteredList; */
+/*   console.log(toggleList) */
 
   for (let i = 0; i < toggleList.length; i++) {
     let tempStatusStorage = '';
+    let tempCourseStorage = '';
     let staText = '';
+    let couText = '';
     const student = toggleList[i];
-    const action = actions[i];
-    const status = actions[i].studentStatus;
+    /* const action = actions[i]; */
+    const status = students[i].studentStatus;
+    const course = students[i].activeCourse
     staText = model.data.courseStatusText[status].text;
+    couText = model.data.CheckBoxCourse[course].name;
     tempStatusStorage = staText;
+    tempCourseStorage = couText;
     html += /*HTML*/ `
     
             <tr class="tr-grid">
@@ -57,15 +64,15 @@ function getStudentActionRows() {
                     }
                 </td>
                 <td>
-                    Siste Hendelse: ${action.activeCourse} ${tempStatusStorage}<br>
+                    Siste Hendelse: ${tempCourseStorage} ${tempStatusStorage}<br>
                     
                      ${
                        student.showingFullInfo
                        
-                         ? `Har gått: ${action.coursesDone}<br>
+                         ? `Har gått: ${student.coursesDone}<br>
                          <br>
-                    Betalt: ${action.paymentDone}<br>
-                    Skylder: ${action.owes}<br>`
+                    Betalt: ${student.paymentDone}<br>
+                    Skylder: ${student.owes}<br>`
                     : ``
                     
                 }

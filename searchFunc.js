@@ -1,51 +1,75 @@
 function searchBarView() {
+  
   return /*HTML*/ `
     <input type="text" value="${model.inputs.databasePage.search}" placeholder="Søk i database" onchange="handleInput(this.value)">
     `;
 }
 
-function searchFilters() {
-  return /*HTML*/ `
-  <div id="filterContainer">
-    <div id="coursefilter" class="filterBox">
-    <div class="subfilter-cont">
-    <h3 id="filterheader">Kurs</h3>
-    <input type="checkbox" id="coursecheck1" name="coursecheck1" value="Get-IT" onclick="getList(this)">
-    <label for="coursecheck1">Get-IT</label><br>
-    <input type="checkbox" id="coursecheck2" name="coursecheck2" value="Start-IT" onclick="getList(this)">
-    <label for="coursecheck2">Start IT</label><br>
-    <input type="checkbox" id="coursecheck3" name="coursecheck3" value="Frontend" onclick="getList(this)">
-    <label for="coursecheck3">Frontend</label><br>
-    <input type="checkbox" id="coursecheck4" name="coursecheck4" value="Intro" onclick="getList(this)">
-    <label for="coursecheck4">Intro</label><br>
-    </div>
-    </div>
-    <div id="statusfilter" class="filterBox">
-    <div class="subfilter-cont">
-    <h3 id="filterheader">Status</h3>
-    <input type="checkbox" id="statuscheck1" name="statuscheck1" value="Avbrutt" onclick="checkStatusFunc(this)">
-    <label for="statuscheck1">Avbrutt</label><br>
-    <input type="checkbox" id="statuscheck2" name="statuscheck2" value="Fullført" onclick="checkStatusFunc(this)">
-    <label for="statuscheck2">Fullført</label><br>
-    <input type="checkbox" id="statuscheck3" name="statuscheck3" value="Søkt" onclick="checkStatusFunc(this)">
-    <label for="statuscheck3">Søkt</label><br>
-    <input type="checkbox" id="statuscheck5" name="statuscheck5" value="Startet" onclick="checkStatusFunc(this)">
-    <label for="statuscheck5">Startet</label><br>
-    </div>
-    </div>
-    <div id="datefilter" class="filterBox">
-    <div class="subfilter-cont">
-    <h3 id="filterheader">Dato</h3>
-    <div class="datefiltcont">Fra</p>
-    <input type="date"></div>
-    <div class="datefiltcont">
-    <p>Til</p>
-    <input type="date"></div>
-    </div>
-    </div>
-    </div>
+
+
+function courseFilters() {
+  let html = '';
+  for(const courseTextInf of model.data.CheckBoxCourse) {
+    html += /*HTML*/`
+      <div class="filterContainer">
+      <div class="subfilter-cont">
+        <input type="checkbox" id="coursecheck1" name="coursecheck1" value="Get-IT" onclick="checkFilter2(${courseTextInf.id}, this)">
+        <label for="coursecheck1">${courseTextInf.name}</label><br>
+      </div>
+      </div>
     `;
+  }
+    return html
 }
+
+// dette er et forsøk på å sjekke om checkbox er checked eller ikke for så å oppdatere CheckBoxCourse modellen og starte filter funksjon, vet ikke om det funker enda
+function checkCheck (crs, inp) {
+if (inp.checked == true) {
+  model.data.CheckBoxCourse[crs].checked = false;
+  model.inputs.databasePage.selectedCourse = '';
+} else {
+  model.data.CheckBoxCourse[crs].checked = true;
+  model.inputs.databasePage.selectedCourse = crs;
+  checkFilter(crs, inp);
+}
+}
+
+function checkFilter(tempNumCourse, input) {
+  // input.checked -> ville hatt detta i model
+    for (i = 0; i < model.data.students.length; i++) {
+      if (model.data.students[i].activeCourse == model.inputs.databasePage.selectedCourse) {
+        model.inputs.databasePage.electedHorse.push(model.data.students[i]);
+      }
+    } 
+  model.inputs.databasePage.filteredList = model.inputs.databasePage.electedHorse;  // vi har lyst til å vise fram den (?)
+  console.log(model.inputs.databasePage.electedHorse) // blir til FilteredList
+  updateView();
+} 
+
+function checkFilter2(tempNumCourse, input) {
+  model.data.CheckBoxCourse[tempNumCourse].checked = true
+  for (i = 0; i < model.data.CheckBoxCourse.length; i++) {
+    if (model.data.CheckBoxCourse[i].checked == true) {
+      console.log("Sjef" + i)
+      // model.inputs.databasePage.electedHorse.push(model.data.)
+      let result = model.data.students.filter((students) => students.activeCourse == 2)
+      console.log(result)
+    }
+  }
+  // model.data.databasePage.filteredList = model.inputs.databasePage.electedHorse
+}
+/*
+  - Sjekke gjennom CheckBoxCourse - check
+  - Om sant, pushe inn? electedHorse - check (?)
+  - 
+*/
+
+/*
+  - Checkboxer
+    - Om en av de er checked, filtrer utifra om de har det "active" kurset
+  - Toggle (ta av checked og updateView på nytt)
+*/
+
 
 function handleInput(input){
   model.inputs.databasePage.search = input;
@@ -63,31 +87,40 @@ function searchInArray(searchTerm){
   updateView();
 }
 
-
-function getList(element){
+/* function getList(element){
   //i view hvor dere looper igjennom listen for å vise hvem studentene etc, 
   //kan dere da bruke const list = getList();
   //loop igjennom den istedenfor, for da kan dere alltid kalle på updateView etter at checkboksene
-  //er endret. 
-
-  let filterList = [];
+  //er endret.
+  let tempElementMemory = CheckBoxCourse[element].name
+  let filteredList = model.data.students.filter((students) => {
   let isChecked = model.data.CheckBoxCourse.find(element => element.checked == true);
   if(isChecked){
    for (i = 0; i < studentActions.length; i++) {
-    if (studentActions[i].activeCourse == isChecked) {
-      filterList.push(students[i]);
-    }
+    studentActions[i].activeCourse == isChecked; 
+    console.log(students[i])
+    //filteredList.push(students[i]);
+    
    }
-   model.inputs.databasePage.filteredList = filterList;
+   return filteredList;
    updateView();
-   console.log(filterList);
-//loope and shit for å pushe riktige ting i filterList. 
-  }
-  else{
+   console.log(filteredList);
+   //loope and shit for å pushe riktige ting i filterList. 
+  } else{
     return model.data.students;
   }
-}
+})
+} */
 
+
+function checkedCategory(activeCourse) {
+    if (activeCourse == 'All Courses') {
+      model.data.CheckBoxCourse = '';
+    }else {
+      model.data.CheckBoxCourse = activeCourse;
+    }
+    actionsStudentsDisplay();
+}
 
 //FÅ ALT DETTE HER OG NEDOVER TIL Å FUNKE!!
 /* function checkedInputs(input) {
