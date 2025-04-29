@@ -6,6 +6,7 @@ const model = {
     databasePage: {
       selectedStudents: [],
       selectedCourse: [],
+      selectedStatus: [],
       search: "",
       filteredList: [],
       dateFromFilter: "",
@@ -24,10 +25,10 @@ const model = {
     ],
 
     CheckBoxStatus: [
-      { id: 1, name: "Avbrutt", checked: false },
-      { id: 2, name: "Fullført", checked: false },
-      { id: 3, name: "Søkt", checked: false },
-      { id: 4, name: "Startet", checked: false },
+      { id: 0, name: "Fullført", checked: false },
+      { id: 1, name: "Startet", checked: false },
+      { id: 2, name: "Søkt", checked: false },
+      { id: 3, name: "Avbrutt", checked: false },
     ],
 
     bulkCheckBoxStatus: [

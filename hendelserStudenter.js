@@ -1,19 +1,24 @@
 function actionsStudentsDisplay() {
   return /*HTML*/ `
     <table class="table-grid">
-      <thead>
-        <tr class="tr-grid">
-          <th id="emptyOverhead"></th>
-          <th>Kontaktinfo</th>
-          <th>Hendelser</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        ${searchBarView()}
-        ${courseFilters()}
-        ${getStudentActionRows()}
-      </tbody>
+    <tbody>
+    ${searchBarView()}
+    <td>
+    ${courseFilters()}
+    </td>
+    <td>
+    ${statusFilterView()}
+    </td>
+    </tbody>
+    <thead>
+    <tr class="tr-grid">
+    <th id="emptyOverhead"></th>
+    <th>Kontaktinfo</th>
+    <th>Hendelser</th>
+    <th></th>
+    </tr>
+    ${getStudentActionRows()}
+    </thead>
     </table>
   `;
 }
