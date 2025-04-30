@@ -21,7 +21,7 @@ function searchInArray(searchTerm){
 })
   model.inputs.databasePage.filteredList = filteredList;
   updateView();
-}s
+}
 
 
 // Kursfilter
@@ -113,22 +113,6 @@ function statusFilter(tempNumStatus, input) {
       console.log(result);
       updateView();
   }
-  // model.data.databasePage.filteredList = model.inputs.databasePage.electedHorse
-/*
-  - Sjekke gjennom CheckBoxCourse - check
-  - Om sant, pushe inn? electedHorse - check (?)
-  - 
-*/
-
-/*
-  - Checkboxer
-    - Om en av de er checked, filtrer utifra om de har det "active" kurset
-  - Toggle (ta av checked og updateView på nytt)
-*/
-
-
-
-
 
 
 function checkedCategory(activeCourse) {
@@ -139,104 +123,20 @@ function checkedCategory(activeCourse) {
     }
     actionsStudentsDisplay();
   }
-  
-  //FÅ ALT DETTE HER OG NEDOVER TIL Å FUNKE!!
-  /* function checkedInputs(input) {
-    model.inputs.databasePage.bulkSelectedCourse = input.value;
-    searchInArrayChecked(input);
-  }
-  
-  function searchInArrayChecked(checkedTerm) {
-    
-  const searchTerm = checkedTerm.toLowerCase().trim();
-  
-  let selectedCourse = model.data.studentActions.filter((studentAction) => {
-    if (!studentAction.activeCourse) return false;
-    const [courseName] = studentAction.activeCourse.split(' ');
-    return courseName.toLowerCase() === searchTerm;
-  });
-  
-  model.inputs.databasePage.selectedCourse = selectedCourse;
-  console.log(selectedCourse);
-  updateView();
-} */
 
-
-
-
-/* function checkCourseFunc(element) {
   
-if (element.checked == true){
-  let tempElementStorage = '';
-  model.data.CheckBoxCourse.find(course => course.name == element.value).checked = true; 
-  /* checkedCourses(element); */
-  /*     searchInArrayChecked(element.value)
-  console.log('courseIsChecked');
-  console.log(element.value);
-} else {
-  model.data.CheckBoxCourse.find(course => course.name == element.value).checked = false;
-console.log('courseIsNotChecked')
-  } 
-  
-  
-  console.log(model.data.CheckBoxCourse.find(course => course.name == element.value).checked)
-} */ 
-
-/* function checkStatusFunc(element) {
-  
-if (element.checked == true){
-  model.data.CheckBoxStatus.find(status => status.name == element.value).checked = true;
-  checkedCourses(element, checked)
-  console.log('statusIsChecked')
-} else {
-  model.data.CheckBoxStatus.find(status => status.name == element.value).checked = false;
-console.log('statusIsNotChecked')
-}
-console.log(model.data.CheckBoxStatus.find(status => status.name == element.value).checked)
-} */
-
-
-
-/* function checkedCourses(element, checked) {
-  let selectedCourse = model.data.studentActions.filter((studentActions) => {
-    let course = studentActions.activeCourse;
-    if(course.includes(element)) {
-      console.log('SJUKKKKT!');
+  //Dato filter
+  function courseDateFilters() {
+    let html = '';
+    for(const date of model.inputs.date) {
+      html += /*HTML*/`
+        <div class="filterContainer">
+        <div class="subfilter-cont">
+        <label for="courseDate">${date.name}</label><br>
+          <input type="date" id="courseDate" name="courseDate">
+        </div>
+        </div>
+      `;
     }
-  })
-} */
-
-/*    function checkedCourses(element) {
-  let selectedCourses = model.data.studentActions.filter((studentAction) => {
-    return studentAction.activeCourse.includes(element);
-  });
-  
-  model.selectedCourses = selectedCourses;
-  
-  return selectedCourses;
-  
-} */
-/* function getList(element){
-  //i view hvor dere looper igjennom listen for å vise hvem studentene etc, 
-  //kan dere da bruke const list = getList();
-  //loop igjennom den istedenfor, for da kan dere alltid kalle på updateView etter at checkboksene
-  //er endret.
-  let tempElementMemory = CheckBoxCourse[element].name
-  let filteredList = model.data.students.filter((students) => {
-  let isChecked = model.data.CheckBoxCourse.find(element => element.checked == true);
-  if(isChecked){
-   for (i = 0; i < studentActions.length; i++) {
-    studentActions[i].activeCourse == isChecked; 
-    console.log(students[i])
-    //filteredList.push(students[i]);
-    
-   }
-   return filteredList;
-   updateView();
-   console.log(filteredList);
-   //loope and shit for å pushe riktige ting i filterList. 
-  } else{
-    return model.data.students;
+      return html
   }
-})
-} */

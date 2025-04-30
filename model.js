@@ -15,6 +15,10 @@ const model = {
       bulkSelectedCourse: "",
       electedHorse: [],
     },
+    date: [{name: 'Fra'},
+            {name: 'Til'}
+  ]
+    
   },
   data: {
     CheckBoxCourse: [
